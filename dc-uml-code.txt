@@ -1,0 +1,121 @@
+@startuml
+title Diagramme de classes - livresgourmands.net
+caption Réalisé par Youssef & Mohammed - 09/09/2025
+
+' ====================
+' Classes principales
+' ====================
+
+class Utilisateur {
+  - id: int
+  - nom: String
+  - email: String
+  - motDePasse: String
+}
+
+class Client {
+  + sEnregistrer()
+  + seConnecter()
+  + passerCommande()
+  + gererPanier()
+  + creerListeCadeaux()
+}
+
+class Editeur {
+  + redigerDescription()
+  + gererCategorie()
+  + validerCommentaire()
+}
+
+class Gestionnaire {
+  + gererCatalogue()
+  + gererStock()
+  + suivreVentes()
+}
+
+class Administrateur {
+  + maintenirSite()
+  + superviserTransactions()
+}
+
+class Livre {
+  - id: int
+  - titre: String
+  - auteur: String
+  - prix: float
+  - stock: int
+}
+
+class Categorie {
+  - id: int
+  - nom: String
+}
+
+class Panier {
+  - id: int
+  - dateCreation: Date
+  + ajouterLivre()
+  + retirerLivre()
+  + modifierQuantite()
+}
+
+class Commande {
+  - id: int
+  - date: Date
+  - statut: String
+  + confirmer()
+}
+
+class Paiement {
+  - id: int
+  - montant: float
+  - mode: String
+  - statut: String
+  + effectuerPaiement()
+}
+
+class ListeCadeaux {
+  - id: int
+  - codePartage: String
+  + ajouterLivre()
+  + retirerLivre()
+}
+
+class Avis {
+  - id: int
+  - note: int
+  - date: Date
+}
+
+class Commentaire {
+  - id: int
+  - contenu: String
+  - statut: String
+}
+
+' ====================
+' Héritages
+' ====================
+Utilisateur <|-- Client
+Utilisateur <|-- Editeur
+Utilisateur <|-- Gestionnaire
+Utilisateur <|-- Administrateur
+
+' ====================
+' Associations (lignes avec cardinalités, pas de flèches)
+' ====================
+Client "1" -- "0..1" Panier : possède
+Client "1" -- "0..*" Commande : effectue
+Client "1" -- "0..*" ListeCadeaux : crée
+Client "1" -- "0..*" Avis : rédige
+Client "1" -- "0..*" Commentaire : écrit
+
+Panier "1" -- "0..*" Livre : contient
+Commande "1" -- "1..*" Livre : concerne
+Commande "1" -- "1" Paiement : est payé par
+ListeCadeaux "1" -- "0..*" Livre : propose
+Livre "*" -- "1" Categorie : appartient à
+Livre "1" -- "0..*" Avis : reçoit
+Livre "1" -- "0..*" Commentaire : reçoit
+
+@enduml
