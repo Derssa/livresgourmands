@@ -1,29 +1,39 @@
 @startuml
-title Diagramme de classes - livresgourmands.net
+title Diagramme de classes UML - livresgourmands.net
 caption Réalisé par Youssef & Mohammed - 09/09/2025
 
 ' ====================
-' Classes principales
+' Front Office
 ' ====================
 
-class Utilisateur {
-  - id: int
-  - nom: String
-  - email: String
-  - motDePasse: String
+class Internaute {
+  + rechercherOuvrage()
+  + consulterOuvrage()
 }
 
 class Client {
   + sEnregistrer()
   + seConnecter()
-  + passerCommande()
   + gererPanier()
+  + passerCommande()
   + creerListeCadeaux()
 }
 
+class Ami {
+  + consulterListeCadeaux()
+  + acheterDepuisListe()
+}
+
+' Héritage
+Internaute <|-- Client
+
+' ====================
+' Back Office
+' ====================
+
 class Editeur {
-  + redigerDescription()
-  + gererCategorie()
+  + editerDescription()
+  + gererCategories()
   + validerCommentaire()
 }
 
@@ -35,87 +45,100 @@ class Gestionnaire {
 
 class Administrateur {
   + maintenirSite()
-  + superviserTransactions()
+  + gererUtilisateurs()
 }
 
-class Livre {
+' ====================
+' Paiement
+' ====================
+
+interface Paiement {
+  + effectuerPaiement()
+}
+
+class CarteBancaire {
+  + effectuerPaiement()
+}
+
+class PayPal {
+  + effectuerPaiement()
+}
+
+Paiement <|.. CarteBancaire
+Paiement <|.. PayPal
+
+' ====================
+' Entités principales
+' ====================
+
+class Ouvrage {
   - id: int
   - titre: String
   - auteur: String
+  - ISBN: String
   - prix: float
   - stock: int
+  - description: String
+  + afficherDetails()
+  + verifierStock()
 }
 
 class Categorie {
   - id: int
   - nom: String
+  - description: String
+  + ajouterCategorie()
+  + modifierCategorie()
+  + supprimerCategorie()
 }
 
 class Panier {
   - id: int
-  - dateCreation: Date
-  + ajouterLivre()
-  + retirerLivre()
-  + modifierQuantite()
+  - articles: List<Ouvrage>
+  + ajouterArticle()
+  + supprimerArticle()
+  + viderPanier()
+  + calculerTotal()
 }
 
 class Commande {
   - id: int
   - date: Date
+  - total: float
   - statut: String
-  + confirmer()
-}
-
-class Paiement {
-  - id: int
-  - montant: float
-  - mode: String
-  - statut: String
-  + effectuerPaiement()
-}
-
-class ListeCadeaux {
-  - id: int
-  - codePartage: String
-  + ajouterLivre()
-  + retirerLivre()
+  - modePaiement: String
+  + validerCommande()
+  + annulerCommande()
+  + suivreCommande()
 }
 
 class Avis {
   - id: int
   - note: int
-  - date: Date
+  + ajouterAvis()
 }
 
 class Commentaire {
   - id: int
   - contenu: String
-  - statut: String
+  - valide: boolean
+  + soumettreCommentaire()
+  + validerCommentaire()
 }
 
 ' ====================
-' Héritages
+' Associations
 ' ====================
-Utilisateur <|-- Client
-Utilisateur <|-- Editeur
-Utilisateur <|-- Gestionnaire
-Utilisateur <|-- Administrateur
 
-' ====================
-' Associations (lignes avec cardinalités, pas de flèches)
-' ====================
 Client "1" -- "0..1" Panier : possède
 Client "1" -- "0..*" Commande : effectue
-Client "1" -- "0..*" ListeCadeaux : crée
 Client "1" -- "0..*" Avis : rédige
 Client "1" -- "0..*" Commentaire : écrit
-
-Panier "1" -- "0..*" Livre : contient
-Commande "1" -- "1..*" Livre : concerne
-Commande "1" -- "1" Paiement : est payé par
-ListeCadeaux "1" -- "0..*" Livre : propose
-Livre "*" -- "1" Categorie : appartient à
-Livre "1" -- "0..*" Avis : reçoit
-Livre "1" -- "0..*" Commentaire : reçoit
+Commande "1" -- "1" Paiement : utilise
+Commande "1" -- "1..*" Ouvrage : concerne
+Panier "1" -- "0..*" Ouvrage : contient
+Ouvrage "*" -- "1" Categorie : appartient à
+Ouvrage "1" -- "0..*" Avis : reçoit
+Ouvrage "1" -- "0..*" Commentaire : reçoit
 
 @enduml
