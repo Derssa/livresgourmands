@@ -1,144 +1,150 @@
 @startuml
-title Diagramme de classes UML - livresgourmands.net
-caption Réalisé par Youssef & Mohammed - 09/09/2025
+' ===============================
+' CLASS DIAGRAM - Online Bookstore
+' ===============================
 
-' ====================
-' Front Office
-' ====================
-
-class Internaute {
-  + rechercherOuvrage()
-  + consulterOuvrage()
+class User {
+  +id : int
+  +email : string
+  +password_hash : string
+  +first_name : string
+  +last_name : string
+  +role : Role
+  +created_at : timestamp
 }
 
-class Client {
-  + sEnregistrer()
-  + seConnecter()
-  + gererPanier()
-  + passerCommande()
-  + creerListeCadeaux()
+enum Role {
+  CLIENT
+  ADMIN
+  EDITOR
+  MANAGER
 }
 
-class Ami {
-  + consulterListeCadeaux()
-  + acheterDepuisListe()
+class Category {
+  +id : int
+  +name : string
+  +description : text
 }
 
-' Héritage
-Internaute <|-- Client
-
-' ====================
-' Back Office
-' ====================
-
-class Editeur {
-  + editerDescription()
-  + gererCategories()
-  + validerCommentaire()
+class Book {
+  +id : int
+  +title : string
+  +author : string
+  +isbn : string
+  +price : decimal
+  +stock : int
+  +description : text
+  +coverImage : string
+  +fileUrl : string
+  +publishedDate : date
 }
 
-class Gestionnaire {
-  + gererCatalogue()
-  + gererStock()
-  + suivreVentes()
+class Order {
+  +id : int
+  +total : decimal
+  +status : OrderStatus
+  +payment_mode : string
+  +is_gift : boolean
+  +gift_recipient_name : string
+  +gift_recipient_email : string
+  +gift_message : text
+  +created_at : timestamp
 }
 
-class Administrateur {
-  + maintenirSite()
-  + gererUtilisateurs()
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
 }
 
-' ====================
-' Paiement
-' ====================
-
-interface Paiement {
-  + effectuerPaiement()
+class OrderItem {
+  +id : int
+  +quantity : int
+  +price_each : decimal
 }
 
-class CarteBancaire {
-  + effectuerPaiement()
+class GiftList {
+  +id : int
+  +title : string
+  +description : text
+  +share_code : string
+  +is_active : boolean
+  +created_at : timestamp
 }
 
-class PayPal {
-  + effectuerPaiement()
+class GiftListItem {
+  +id : int
+  +quantity : int
+  +created_at : timestamp
 }
 
-Paiement <|.. CarteBancaire
-Paiement <|.. PayPal
-
-' ====================
-' Entités principales
-' ====================
-
-class Ouvrage {
-  - id: int
-  - titre: String
-  - auteur: String
-  - ISBN: String
-  - prix: float
-  - stock: int
-  - description: String
-  + afficherDetails()
-  + verifierStock()
+class GiftPurchase {
+  +id : int
+  +quantity : int
+  +purchased_at : timestamp
 }
 
-class Categorie {
-  - id: int
-  - nom: String
-  - description: String
-  + ajouterCategorie()
-  + modifierCategorie()
-  + supprimerCategorie()
+class Review {
+  +id : int
+  +rating : tinyint
+  +created_at : timestamp
 }
 
-class Panier {
-  - id: int
-  - articles: List<Ouvrage>
-  + ajouterArticle()
-  + supprimerArticle()
-  + viderPanier()
-  + calculerTotal()
+class Comment {
+  +id : int
+  +content : text
+  +validated : boolean
+  +created_at : timestamp
 }
 
-class Commande {
-  - id: int
-  - date: Date
-  - total: float
-  - statut: String
-  - modePaiement: String
-  + validerCommande()
-  + annulerCommande()
-  + suivreCommande()
+class UserEbook {
+  +id : int
+  +source : EbookSource
+  +created_at : timestamp
 }
 
-class Avis {
-  - id: int
-  - note: int
-  + ajouterAvis()
+enum EbookSource {
+  PURCHASE
+  GIFT
 }
 
-class Commentaire {
-  - id: int
-  - contenu: String
-  - valide: boolean
-  + soumettreCommentaire()
-  + validerCommentaire()
+class GiftRedemption {
+  +id : int
+  +recipient_email : string
+  +token : string
+  +redeemed_at : timestamp
+  +created_at : timestamp
 }
 
-' ====================
-' Associations
-' ====================
+' ===============================
+' RELATIONSHIPS
+' ===============================
 
-Client "1" -- "0..1" Panier : possède
-Client "1" -- "0..*" Commande : effectue
-Client "1" -- "0..*" Avis : rédige
-Client "1" -- "0..*" Commentaire : écrit
-Commande "1" -- "1" Paiement : utilise
-Commande "1" -- "1..*" Ouvrage : concerne
-Panier "1" -- "0..*" Ouvrage : contient
-Ouvrage "*" -- "1" Categorie : appartient à
-Ouvrage "1" -- "0..*" Avis : reçoit
-Ouvrage "1" -- "0..*" Commentaire : reçoit
+User "1" -- "many" Order : places >
+Order "1" -- "many" OrderItem : contains >
+OrderItem "many" -- "1" Book : references >
+
+User "1" -- "many" GiftList : owns >
+GiftList "1" -- "many" GiftListItem : includes >
+GiftListItem "many" -- "1" Book : references >
+
+GiftList "1" -- "many" GiftPurchase : has >
+GiftPurchase "many" -- "1" User : buyer >
+GiftPurchase "many" -- "1" Book : item >
+
+User "1" -- "many" Review : writes >
+Review "many" -- "1" Book : reviews >
+
+User "1" -- "many" Comment : posts >
+Comment "many" -- "1" Book : comments >
+
+User "1" -- "many" UserEbook : owns >
+UserEbook "many" -- "1" Book : represents >
+
+Order "1" -- "many" GiftRedemption : generates >
+GiftRedemption "many" -- "1" Book : gift >
+GiftRedemption "many" -- "0..1" User : redeemed_by >
+
+Category "1" -- "many" Book : classifies >
 
 @enduml

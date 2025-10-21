@@ -1,101 +1,61 @@
 @startuml
-title Diagramme de cas d'utilisation - livresgourmands.net
-caption Réalisé par Youssef & Mohammed - 09/09/2025
+' ===============================
+' HORIZONTAL USE CASE DIAGRAM - Online Bookstore
+' ===============================
 
 left to right direction
 
-' Définition des acteurs
-actor Internaute as I
-actor Client as C
-actor Ami as A
-actor Editeur as E
-actor Gestionnaire as G
-actor Administrateur as Admin
-actor "Prestataire de paiement" as P
+actor Client
+actor Admin
+actor Editor
+actor Manager
 
-' Héritage
-I <|-- C
+rectangle "Online Bookstore System" {
+  (Register / Login) as UC1
+  (Browse Books) as UC2
+  (Search Books by Category) as UC3
+  (View Book Details) as UC4
+  (Place Order) as UC5
+  (View Order History) as UC6
+  (Write Review) as UC7
+  (Post Comment) as UC8
+  (Create Gift List) as UC9
+  (Share Gift List) as UC10
+  (Purchase Gift) as UC11
+  (Redeem Gift) as UC12
+  (Access Library) as UC13
 
-' --- Bloc Front Office ---
-rectangle "Front Office" {
-  (Rechercher des ouvrages) as Rech
-  (Consulter un ouvrage) as ConsOuv
-  (S'enregistrer) as Enreg
-  (Se connecter) as Login
-  (Gérer le panier) as Panier
-  (Passer une commande) as Cmd
-  (Choisir adresse et type de livraison) as Livraison
-  (Effectuer un paiement en ligne) as PaiementUC
-  (Recevoir confirmation) as Confirm
-  (Sélectionner des articles) as SecArticles
-  (Créer une liste de cadeaux) as Cadeaux
-  (Consulter une liste de cadeaux) as ListeCadeaux
-  (Acheter depuis une liste de cadeaux) as AchatListe
-  (Proposer un avis) as Avis
-  (Proposer un commentaire) as Com
-  (Consulter ses commandes) as HistCmd
-  (Consulter historique des paiements) as HistPaiement
-  (PaiementUC) --> (Courriel automatique) : <<extend>>
-  (PaiementUC) --> (Réessayer paiement) : <<extend>>
-  (PaiementUC) --> (changer mode de paiement) : <<extend>>
+  (Manage Users) as UC14
+  (Manage Books & Categories) as UC15
+  (Validate Comments / Reviews) as UC16
+  (View Reports) as UC17
 }
 
-' --- Bloc Back Office ---
-rectangle "Back Office" {
-  (Rédiger et éditer descriptions) as Descrip
-  (Gérer catégories d’ouvrages) as Categ
-  (Valider/rejeter commentaires) as ValidCom
-  (Gérer catalogue) as Catalogue
-  (Gérer stock) as Stock
-  (Suivre ventes) as Ventes
-  (Maintenir le site) as Maint
-  (Superviser transactions) as Transac
-}
+' ===============================
+' RELATIONSHIPS
+' ===============================
 
-' --- Extensions ---
+' CLIENT interactions
+Client --> UC1
+Client --> UC2
+Client --> UC3
+Client --> UC4
+Client --> UC5
+Client --> UC6
+Client --> UC7
+Client --> UC8
+Client --> UC9
+Client --> UC10
+Client --> UC11
+Client --> UC12
+Client --> UC13
 
-' Relations Internaute
-I --> Rech
-I --> ConsOuv
-
-' Relations Client
-C --> Enreg
-C --> Login
-C --> Panier
-C --> Cmd
-C --> Cadeaux
-C --> Avis
-C --> Com
-C --> HistCmd
-C --> HistPaiement
-
-Cmd --> Livraison : <<include>>
-Cmd --> PaiementUC : <<include>>
-Cmd --> Confirm : <<include>>
-
-' Relations Ami
-A --> ListeCadeaux
-A --> AchatListe
-AchatListe --> PaiementUC : <<include>>
-AchatListe --> Confirm : <<include>>
-AchatListe --> SecArticles : <<include>>
-
-' Paiement externe
-PaiementUC --> P
-
-' Relations Editeur
-E --> Descrip
-E --> Categ
-E --> ValidCom
-
-' Relations Gestionnaire
-G --> Catalogue
-G --> Stock
-G --> Ventes
-
-' Relations Administrateur
-Admin --> Maint
-Admin --> Transac
-Admin --> HistPaiement
+' ADMIN & STAFF
+Admin --> UC14
+Admin --> UC15
+Admin --> UC16
+Manager --> UC17
+Editor --> UC15
+Editor --> UC16
 
 @enduml
