@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const GiftLists = require("../controllers/giftListController");
-const { authenticateJwt } = require("../middleware/auth");
+const { authenticateJwt, authorizeRoles } = require("../middleware/auth");
 
 const router = Router();
 
@@ -14,6 +14,7 @@ router.post("/items", authenticateJwt, GiftLists.addItem);
 router.delete(
   "/:giftListId/items/:bookId",
   authenticateJwt,
+  authorizeRoles("ADMIN", "MANAGER"),
   GiftLists.removeItem
 );
 router.post(

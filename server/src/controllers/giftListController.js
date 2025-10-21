@@ -1,4 +1,8 @@
 const GiftLists = require("../models/giftListModel");
+const Stripe = require("stripe");
+const stripe = new Stripe(process.env.STRIPE_SECRET, {
+  apiVersion: "2024-06-20",
+});
 
 async function createGiftList(req, res) {
   const { title, description } = req.body || {};
@@ -50,23 +54,50 @@ async function removeItem(req, res) {
 }
 
 async function purchaseFromGiftList(req, res) {
-  const { shareCode } = req.params;
-  const { bookId, quantity } = req.body || {};
+  try {
+    const { shareCode } = req.params;
 
-  if (!bookId) return res.status(400).json({ message: "bookId is required" });
+    // Get gift list by share code
+    const giftList = await GiftLists.getGiftListByCode(shareCode);
+    if (!giftList)
+      return res.status(404).json({ message: "Gift list not found" });
 
-  const giftList = await GiftLists.getGiftListByCode(shareCode);
-  if (!giftList)
-    return res.status(404).json({ message: "Gift list not found" });
+    const items = await GiftLists.getGiftListItems(giftList.id);
+    if (!items || !items.length)
+      return res.status(400).json({ message: "Gift list is empty" });
 
-  const purchase = await GiftLists.recordGiftPurchase({
-    giftListId: giftList.id,
-    buyerUserId: req.user.id,
-    bookId,
-    quantity: quantity || 1,
-  });
+    // Build Stripe line_items from gift list items
+    const line_items = items.map((item) => ({
+      price_data: {
+        currency: "cad",
+        product_data: { name: item.title },
+        unit_amount: Math.round(Number(item.price) * 100), // Stripe expects cents
+      },
+      quantity: item.quantity,
+    }));
 
-  res.status(201).json(purchase);
+    // Create Stripe Checkout Session
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items,
+      metadata: {
+        giftListId: giftList.id.toString(),
+        buyerUserId: req.user.id.toString(),
+        items: JSON.stringify(items),
+      },
+      success_url: `http://localhost:3000/success`,
+      cancel_url: `http://localhost:3000/cancel`,
+    });
+
+    // Return session URL to frontend
+    res.status(201).json({ id: session.id, url: session.url });
+  } catch (err) {
+    console.error("Failed to create Stripe checkout session:", err);
+    res.status(500).json({
+      message: "Could not create checkout session",
+      error: err.message,
+    });
+  }
 }
 
 module.exports = {

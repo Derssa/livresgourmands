@@ -6,25 +6,33 @@ async function listMine(req, res) {
 }
 
 async function create(req, res) {
-  const {
-    total,
-    paymentMode,
-    isGift = false,
-    giftRecipientName,
-    giftRecipientEmail,
-    giftMessage,
-  } = req.body || {};
+  try {
+    const {
+      total,
+      paymentMode,
+      isGift,
+      giftRecipientName,
+      giftRecipientEmail,
+      giftMessage,
+      items,
+    } = req.body || {};
 
-  const order = await Orders.createOrder({
-    userId: req.user.id,
-    total,
-    paymentMode,
-    isGift,
-    giftRecipientName,
-    giftRecipientEmail,
-    giftMessage,
-  });
-  res.status(201).json(order);
+    const order = await Orders.createOrder({
+      userId: req.user.id,
+      total,
+      paymentMode,
+      isGift,
+      giftRecipientName,
+      giftRecipientEmail,
+      giftMessage,
+      items,
+    });
+
+    res.status(201).json(order);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to create order" });
+  }
 }
 
 module.exports = { listMine, create };

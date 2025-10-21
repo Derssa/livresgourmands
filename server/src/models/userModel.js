@@ -38,11 +38,32 @@ async function listUsers() {
   return rows;
 }
 
-async function updateUser(id, { firstName = null, lastName = null, role }) {
-  await pool.query(
-    "UPDATE users SET first_name=?, last_name=?, role=? WHERE id=?",
-    [firstName, lastName, role, id]
-  );
+async function updateUser(id, fields = {}) {
+  const { firstName, lastName, role } = fields;
+
+  const updates = [];
+  const values = [];
+
+  if (firstName !== undefined) {
+    updates.push("first_name = ?");
+    values.push(firstName);
+  }
+  if (lastName !== undefined) {
+    updates.push("last_name = ?");
+    values.push(lastName);
+  }
+  if (role !== undefined) {
+    updates.push("role = ?");
+    values.push(role);
+  }
+
+  if (updates.length === 0) {
+    return;
+  }
+
+  values.push(id);
+  const sql = `UPDATE users SET ${updates.join(", ")} WHERE id = ?`;
+  await pool.query(sql, values);
 }
 
 async function deleteUser(id) {

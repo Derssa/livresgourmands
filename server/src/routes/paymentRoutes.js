@@ -5,6 +5,5 @@ const Payments = require("../controllers/paymentController");
 const router = Router();
 
 router.post("/checkout", authenticateJwt, Payments.createCheckoutSession);
-router.post("/webhook", Payments.stripeWebhook);
 
 module.exports = router;

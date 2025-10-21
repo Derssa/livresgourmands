@@ -1,7 +1,7 @@
 const Gifts = require("../models/giftRedemptionModel");
 
 async function redeem(req, res) {
-  const token = req.query.t || req.body.token;
+  const token = req.query.t;
   if (!token) return res.status(400).json({ message: "token required" });
   const redemption = await Gifts.redeemToken({ token, userId: req.user.id });
   if (!redemption)

@@ -6,13 +6,19 @@ const app = express();
 
 // Core middleware
 app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
 
 // Health check
 app.get("/health", (req, res) => {
   res.json({ status: "ok", service: "livresgourmands-api" });
 });
 
+app.post(
+  "/api/payments/webhook",
+  express.raw({ type: "application/json" }),
+  require("./controllers/paymentController").stripeWebhook
+);
+
+app.use(express.json());
 // Mount routes (will be added later)
 app.use("/api", require("./routes"));
 
