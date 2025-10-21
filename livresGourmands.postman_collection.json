@@ -1,0 +1,1043 @@
+{
+	"info": {
+		"_postman_id": "cd27df22-064a-46e7-b85a-4a468bdf708b",
+		"name": "livresGourmands",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39574847"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"1234\",\r\n    \"firstName\":\"admin\",\r\n    \"lastName\":\"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/auth/register",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/auth/login",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "me",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/auth/me",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "books",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiBaseUrl}}/books/",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"books",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/books/2",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"books",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Vegan Delights: Fresh & Flavorful\",\r\n    \"author\": \"Carlos Mendes\",\r\n    \"isbn\": \"978-0-98765-432-1\",\r\n    \"price\": 34.50,\r\n    \"stock\": 60,\r\n    \"description\": \"A modern vegan cookbook packed with vibrant plant-based recipes that are easy, healthy, and full of flavor.\",\r\n    \"categoryId\": 3,\r\n    \"coverImage\": \"https://example.com/images/vegan-delights.jpg\",\r\n    \"fileUrl\": \"https://example.com/files/vegan-delights.pdf\",\r\n    \"publishedDate\": \"2023-11-20\"\r\n  }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/books/",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"books",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"price\": 19.25,\r\n  \"stock\": 190\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/books/1",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"books",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/books/6",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"books",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "categories",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiBaseUrl}}/categories/",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"categories",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"International Cuisine\",\r\n    \"description\": \"Explore global flavors from Italian to Japanese and everything in between.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/categories/",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"categories",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"International world Cuisine\",\r\n    \"description\": \"Explore global flavors from Italian to Moroccan and everything in between.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/categories/4",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"categories",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/categories/1",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"categories",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "giftsList",
+					"item": [
+						{
+							"name": "list all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/gift-lists/",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"gift-lists",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "gifts list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiBaseUrl}}/gift-lists/88167b9124eb655d6dce",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"gift-lists",
+										"88167b9124eb655d6dce"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Birthday Wishes\",\r\n  \"description\": \"A collection of books and gifts I would love for my birthday.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/gift-lists/",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"gift-lists",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add item to gifts list",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"giftListId\": 1,\r\n  \"bookId\": 4,\r\n  \"quantity\": 2\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/gift-lists/items",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"gift-lists",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "buy from gift list",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/gift-lists/88167b9124eb655d6dce/purchase",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"gift-lists",
+										"88167b9124eb655d6dce",
+										"purchase"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete item in gift list",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/1/items/4",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"1",
+										"items",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "giftsRedemption",
+					"item": [
+						{
+							"name": "library",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/gifts/library",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"gifts",
+										"library"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "redeem",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/gifts/redeem?t=423cfbbfee5e97db34933e7617a0ebcbef084d5c7c17af5d",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"gifts",
+										"redeem"
+									],
+									"query": [
+										{
+											"key": "t",
+											"value": "423cfbbfee5e97db34933e7617a0ebcbef084d5c7c17af5d"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "orders",
+					"item": [
+						{
+							"name": "list my orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/orders/me",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"orders",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"total\": 79.90,\r\n  \"paymentMode\": \"Credit Card\",\r\n  \"isGift\": true,\r\n  \"giftRecipientName\": \"Laura Bennett\",\r\n  \"giftRecipientEmail\": \"laura.bennett@example.com\",\r\n  \"giftMessage\": \"Happy Birthday! Enjoy these delicious recipes.\",\r\n  \"items\": [\r\n    {\r\n      \"bookId\": 2,\r\n      \"quantity\": 2,\r\n      \"priceEach\": 29.95\r\n    },\r\n    {\r\n      \"bookId\": 4,\r\n      \"quantity\": 1,\r\n      \"priceEach\": 29.95\r\n    }\r\n  ]\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/orders/",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"orders",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update status",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status\": \"PAID\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/orders/6/status",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"orders",
+										"6",
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/orders/6",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"orders",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "payment",
+					"item": [
+						{
+							"name": "checkout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"items\": [\r\n    {\r\n      \"bookId\": 1,\r\n      \"title\": \"Clean Code\",\r\n      \"price\": 19.99,\r\n      \"quantity\": 1\r\n    },\r\n    {\r\n      \"bookId\": 2,\r\n      \"title\": \"Refactoring\",\r\n      \"price\": 29.99,\r\n      \"quantity\": 2\r\n    }\r\n  ],\r\n  \"successUrl\": \"http://localhost:3000/success\",\r\n  \"cancelUrl\": \"http://localhost:3000/cancel\",\r\n  \"isGift\": true,\r\n  \"giftRecipientName\": \"John Doe\",\r\n  \"giftRecipientEmail\": \"john@example.com\",\r\n  \"giftMessage\": \"Happy Birthday! Enjoy this book!\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/payments/checkout",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"payments",
+										"checkout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "reviews",
+					"item": [
+						{
+							"name": "read validated comments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/community/books/2/comments",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"community",
+										"books",
+										"2",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create review",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"bookId\": 2,\r\n  \"rating\": 4\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/community/reviews",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"community",
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"bookId\": 2,\r\n  \"content\": \"this book is bad\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/community/comments",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"community",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validate comment",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/community/comments/1/validate",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"community",
+										"comments",
+										"1",
+										"validate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reject comment",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/community/comments/1/reject",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"community",
+										"comments",
+										"1",
+										"reject"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/users/",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"role\": \"CLIENT\",\r\n    \"firstName\": \"test\",\r\n    \"lastName\": \"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/users/1",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiBaseUrl}}/users/1",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "health",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkNMSUVOVCIsImVtYWlsIjoiZXhhbXBsZUBnbWFpbC5jb20iLCJpYXQiOjE3NjEwMDgwOTcsImV4cCI6MTc2MTYxMjg5N30.6zs4yiJMI-MLS6Pt24yqv_bKa7O23qlmIIIagEnL7oI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseURL}}/health",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "apiBaseUrl",
+			"value": ""
+		}
+	]
+}
