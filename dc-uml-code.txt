@@ -1,7 +1,30 @@
 @startuml
 ' ===============================
-' CLASS DIAGRAM - Online Bookstore
+' HORIZONTAL CLASS DIAGRAM - Online Bookstore with Methods
 ' ===============================
+
+left to right direction
+
+' ========= ENUMS ==========
+enum Role {
+  CLIENT
+  ADMIN
+  EDITOR
+  MANAGER
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+enum EbookSource {
+  PURCHASE
+  GIFT
+}
+
+' ========= CLASSES ==========
 
 class User {
   +id : int
@@ -11,19 +34,24 @@ class User {
   +last_name : string
   +role : Role
   +created_at : timestamp
-}
 
-enum Role {
-  CLIENT
-  ADMIN
-  EDITOR
-  MANAGER
+  +findByEmail(email)
+  +findById(id)
+  +createUser(data)
+  +listUsers()
+  +updateUser(id, fields)
+  +deleteUser(id)
 }
 
 class Category {
   +id : int
   +name : string
   +description : text
+
+  +listCategories()
+  +createCategory(data)
+  +updateCategory(id, data)
+  +deleteCategory(id)
 }
 
 class Book {
@@ -34,13 +62,21 @@ class Book {
   +price : decimal
   +stock : int
   +description : text
+  +category_id : int
   +coverImage : string
   +fileUrl : string
   +publishedDate : date
+
+  +listBooks()
+  +getBook(id)
+  +createBook(data)
+  +updateBook(id, data)
+  +deleteBook(id)
 }
 
 class Order {
   +id : int
+  +user_id : int
   +total : decimal
   +status : OrderStatus
   +payment_mode : string
@@ -49,49 +85,87 @@ class Order {
   +gift_recipient_email : string
   +gift_message : text
   +created_at : timestamp
-}
 
-enum OrderStatus {
-  PENDING
-  PAID
-  CANCELLED
+  +listOrdersByUser(userId)
+  +createOrder(data)
 }
 
 class OrderItem {
   +id : int
+  +order_id : int
+  +book_id : int
   +quantity : int
   +price_each : decimal
 }
 
 class GiftList {
   +id : int
+  +user_id : int
   +title : string
   +description : text
   +share_code : string
   +is_active : boolean
   +created_at : timestamp
+
+  +createGiftList(data)
+  +getGiftListByCode(shareCode)
+  +getGiftListItems(giftListId)
+  +addItemToGiftList(data)
+  +removeItemFromGiftList(giftListId, bookId)
+  +getUserGiftLists(userId)
+  +recordGiftPurchase(data)
 }
 
 class GiftListItem {
   +id : int
+  +gift_list_id : int
+  +book_id : int
   +quantity : int
   +created_at : timestamp
 }
 
 class GiftPurchase {
   +id : int
+  +gift_list_id : int
+  +buyer_user_id : int
+  +book_id : int
   +quantity : int
   +purchased_at : timestamp
 }
 
+class GiftRedemption {
+  +id : int
+  +order_id : int
+  +book_id : int
+  +recipient_email : string
+  +token : string
+  +redeemed_by_user_id : int
+  +redeemed_at : timestamp
+  +created_at : timestamp
+
+  +createRedemption(data)
+  +redeemToken(data)
+  +listMyLibrary(userId)
+}
+
 class Review {
   +id : int
+  +user_id : int
+  +book_id : int
   +rating : tinyint
   +created_at : timestamp
+
+  +userPurchasedBook(userId, bookId)
+  +addReview(data)
+  +addComment(data)
+  +listComments(bookId)
+  +validateComment(id, validated)
 }
 
 class Comment {
   +id : int
+  +user_id : int
+  +book_id : int
   +content : text
   +validated : boolean
   +created_at : timestamp
@@ -99,26 +173,13 @@ class Comment {
 
 class UserEbook {
   +id : int
+  +user_id : int
+  +book_id : int
   +source : EbookSource
   +created_at : timestamp
 }
 
-enum EbookSource {
-  PURCHASE
-  GIFT
-}
-
-class GiftRedemption {
-  +id : int
-  +recipient_email : string
-  +token : string
-  +redeemed_at : timestamp
-  +created_at : timestamp
-}
-
-' ===============================
-' RELATIONSHIPS
-' ===============================
+' ========= RELATIONSHIPS ==========
 
 User "1" -- "many" Order : places >
 Order "1" -- "many" OrderItem : contains >
