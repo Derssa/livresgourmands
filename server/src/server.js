@@ -19,6 +19,7 @@ app.post(
 );
 
 app.use(express.json());
+// all routes
 app.use("/api", require("./routes"));
 
 const PORT = process.env.PORT || 4000;
