@@ -4,7 +4,7 @@ const C = require("../controllers/giftRedemptionController");
 
 const router = Router();
 
-// After login, the client calls this with token t to bind the gift to their account
+// After login, the client calls this with token t to attache the gift to their account
 router.post("/redeem", authenticateJwt, C.redeem);
 
 // User's ebook library

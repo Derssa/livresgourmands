@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const app = express();
 
-// Core middleware
+// Cors middleware
 app.use(cors({ origin: true, credentials: true }));
 
 // Health check
@@ -19,11 +19,9 @@ app.post(
 );
 
 app.use(express.json());
-// Mount routes (will be added later)
 app.use("/api", require("./routes"));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`API running on http://localhost:${PORT}`);
 });

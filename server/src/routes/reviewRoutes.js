@@ -7,7 +7,7 @@ const router = Router();
 // Public: read validated comments for a book
 router.get("/books/:bookId/comments", C.listComments);
 
-// Auth: purchasers only
+// Auth: purchasers clients only
 router.post("/reviews", authenticateJwt, C.postReview);
 router.post("/comments", authenticateJwt, C.postComment);
 

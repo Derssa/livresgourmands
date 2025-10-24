@@ -138,7 +138,7 @@ async function stripeWebhook(req, res) {
               recipientEmail: giftRecipientEmail,
             });
 
-            // TODO: send email to giftRecipientEmail
+            // TODO: send email to giftRecipientEmail (adding email conformation)
             console.log(
               `Gift redemption created for order ${order.id} (token: ${token})`
             );

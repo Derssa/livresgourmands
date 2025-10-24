@@ -1,4 +1,8 @@
--- Minimal schema for authentication and core entities mapping UML high-level
+CREATE DATABASE IF NOT EXISTS livresgourmands
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE livresgourmands;
 
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
