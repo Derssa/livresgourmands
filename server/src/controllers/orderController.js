@@ -1,56 +1,86 @@
+const Joi = require("joi");
 const Orders = require("../models/orderModel");
 
+const createOrderSchema = Joi.object({
+  total: Joi.number().precision(2).required(),
+  paymentMode: Joi.string().trim().allow(null, "").optional(),
+  isGift: Joi.boolean().optional(),
+  giftRecipientName: Joi.string().trim().allow(null, "").optional(),
+  giftRecipientEmail: Joi.string().email().allow(null, "").optional(),
+  giftMessage: Joi.string().trim().allow(null, "").optional(),
+  items: Joi.array()
+    .items(
+      Joi.object({
+        bookId: Joi.number().integer().required(),
+        quantity: Joi.number().integer().min(1).required(),
+        priceEach: Joi.number().precision(2).required(),
+      })
+    )
+    .required()
+    .min(1),
+});
+
+const updateStatusSchema = Joi.object({
+  status: Joi.string()
+    .valid("PENDING", "PAID", "SHIPPED", "CANCELLED")
+    .required(),
+});
+
 async function listMine(req, res) {
-  const rows = await Orders.listOrdersByUser(req.user.id);
-  res.json(rows);
+  try {
+    const rows = await Orders.listOrdersByUser(req.user.id);
+    res.json(rows);
+  } catch (err) {
+    console.error("List orders error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 }
 
 async function create(req, res) {
   try {
-    const {
-      total,
-      paymentMode,
-      isGift,
-      giftRecipientName,
-      giftRecipientEmail,
-      giftMessage,
-      items,
-    } = req.body || {};
+    const { error, value } = createOrderSchema.validate(req.body);
+    if (error)
+      return res.status(400).json({ message: error.details[0].message });
 
     const order = await Orders.createOrder({
       userId: req.user.id,
-      total,
-      paymentMode,
-      isGift,
-      giftRecipientName,
-      giftRecipientEmail,
-      giftMessage,
-      items,
+      ...value,
     });
 
     res.status(201).json(order);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to create order" });
+    console.error("Create order error:", err);
+    res.status(500).json({ message: "Failed to create order" });
   }
 }
 
-module.exports = { listMine, create };
 async function updateStatus(req, res) {
-  const { status } = req.body || {};
-  await require("../config/db").query("UPDATE orders SET status=? WHERE id=?", [
-    status,
-    req.params.id,
-  ]);
-  res.json({ ok: true });
+  try {
+    const { error, value } = updateStatusSchema.validate(req.body);
+    if (error)
+      return res.status(400).json({ message: error.details[0].message });
+
+    await require("../config/db").query(
+      "UPDATE orders SET status=? WHERE id=?",
+      [value.status, req.params.id]
+    );
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Update status error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 }
 
 async function remove(req, res) {
-  await require("../config/db").query("DELETE FROM orders WHERE id=?", [
-    req.params.id,
-  ]);
-  res.status(204).end();
+  try {
+    await require("../config/db").query("DELETE FROM orders WHERE id=?", [
+      req.params.id,
+    ]);
+    res.status(204).end();
+  } catch (err) {
+    console.error("Delete order error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 }
-
-module.exports.updateStatus = updateStatus;
-module.exports.remove = remove;
+module.exports = { listMine, create, updateStatus, remove };

@@ -116,16 +116,35 @@ async function stripeWebhook(req, res) {
         });
 
         const pool = require("../config/db");
+        const conn = await pool.getConnection();
 
-        for (const item of itemsData) {
-          try {
-            await pool.query(
+        try {
+          await conn.beginTransaction();
+
+          for (const item of itemsData) {
+            // Insert order item
+            await conn.query(
               "INSERT INTO order_items (order_id, book_id, quantity, price_each) VALUES (?, ?, ?, ?)",
               [order.id, item.bookId, item.quantity, item.price]
             );
-          } catch (err) {
-            console.error("Failed to insert order item:", item, err);
+
+            // Reduce stock
+            const [stockResult] = await conn.query(
+              "UPDATE books SET stock = stock - ? WHERE id = ? AND stock >= ?",
+              [item.quantity, item.bookId, item.quantity]
+            );
+
+            if (stockResult.affectedRows === 0) {
+              throw new Error(`Insufficient stock for book ID ${item.bookId}`);
+            }
           }
+
+          await conn.commit();
+        } catch (err) {
+          await conn.rollback();
+          console.error("Failed to insert order items or update stock:", err);
+        } finally {
+          conn.release();
         }
 
         // --- Create ONE redemption token per ORDER ---
