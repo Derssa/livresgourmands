@@ -7,6 +7,8 @@ const router = Router();
 router.get("/me", authenticateJwt, Orders.listMine);
 // Creating orders is allowed to authenticated clients
 router.post("/", authenticateJwt, Orders.create);
+// Add book/item to an existing order (authenticated clients)
+router.post("/:id/items", authenticateJwt, Orders.addItem);
 // Admin and Manager can change order status and delete orders
 router.put(
   "/:id/status",

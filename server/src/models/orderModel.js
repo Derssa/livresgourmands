@@ -67,4 +67,37 @@ async function createOrder({
   }
 }
 
-module.exports = { listOrdersByUser, createOrder };
+async function addItemToOrder(orderId, { bookId, quantity, priceEach }) {
+  const conn = await pool.getConnection();
+  try {
+    // Check stock first
+    const [books] = await conn.query(
+      "SELECT stock FROM books WHERE id = ?",
+      [bookId]
+    );
+
+    if (books.length === 0) {
+      throw new Error(`Book ID ${bookId} not found`);
+    }
+
+    if (books[0].stock < quantity) {
+      throw new Error(`Insufficient stock for book ID ${bookId}`);
+    }
+
+    // Insert the order item (without reducing stock)
+    await conn.query(
+      "INSERT INTO order_items (order_id, book_id, quantity, price_each) VALUES (?, ?, ?, ?)",
+      [orderId, bookId, quantity, priceEach]
+    );
+
+    return { orderId, bookId, quantity, priceEach };
+  } finally {
+    conn.release();
+  }
+}
+
+module.exports = {
+  listOrdersByUser,
+  createOrder,
+  addItemToOrder,
+};

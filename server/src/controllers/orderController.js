@@ -16,8 +16,13 @@ const createOrderSchema = Joi.object({
         priceEach: Joi.number().precision(2).required(),
       })
     )
-    .required()
-    .min(1),
+    .optional(),
+});
+
+const addItemSchema = Joi.object({
+  bookId: Joi.number().integer().required(),
+  quantity: Joi.number().integer().min(1).required(),
+  priceEach: Joi.number().precision(2).required(),
 });
 
 const updateStatusSchema = Joi.object({
@@ -54,6 +59,22 @@ async function create(req, res) {
   }
 }
 
+async function addItem(req, res) {
+  try {
+    const { error, value } = addItemSchema.validate(req.body);
+    if (error) return res.status(400).json({ message: error.details[0].message });
+
+    const orderId = parseInt(req.params.id);
+
+    const item = await Orders.addItemToOrder(orderId, value);
+
+    res.status(201).json(item);
+  } catch (err) {
+    console.error("Add item to order error:", err);
+    res.status(500).json({ message: err.message || "Server error" });
+  }
+}
+
 async function updateStatus(req, res) {
   try {
     const { error, value } = updateStatusSchema.validate(req.body);
@@ -83,4 +104,4 @@ async function remove(req, res) {
     res.status(500).json({ message: "Server error" });
   }
 }
-module.exports = { listMine, create, updateStatus, remove };
+module.exports = { listMine, create, addItem, updateStatus, remove };

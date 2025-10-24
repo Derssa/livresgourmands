@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "cd27df22-064a-46e7-b85a-4a468bdf708b",
+		"_postman_id": "8acac09d-1188-4cbc-9c22-4ac0bd15a7aa",
 		"name": "livresGourmands",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39574847"
+		"_exporter_id": "45228892",
+		"_collection_link": "https://youssef-5987592.postman.co/workspace/youssef's-Workspace~6e33812b-3d48-4106-828c-f2b4544f786d/collection/45228892-8acac09d-1188-4cbc-9c22-4ac0bd15a7aa?action=share&source=collection_link&creator=45228892"
 	},
 	"item": [
 		{
@@ -19,7 +20,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"1234\",\r\n    \"firstName\":\"admin\",\r\n    \"lastName\":\"admin\"\r\n}",
+									"raw": "{\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"123456\",\r\n    \"firstName\":\"admin\",\r\n    \"lastName\":\"admin\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -46,7 +47,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"1234\"\r\n}",
+									"raw": "{\r\n    \"email\":\"admin@admin.com\",\r\n    \"password\":\"123456\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -151,13 +152,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEzNDQ3MzksImV4cCI6MTc2MTk0OTUzOX0.zfEbv8mWxdlb-VnQXjzAHqeeUZo-j6Rza4egl1W9Gy0",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Vegan Delights: Fresh & Flavorful\",\r\n    \"author\": \"Carlos Mendes\",\r\n    \"isbn\": \"978-0-98765-432-1\",\r\n    \"price\": 34.50,\r\n    \"stock\": 60,\r\n    \"description\": \"A modern vegan cookbook packed with vibrant plant-based recipes that are easy, healthy, and full of flavor.\",\r\n    \"categoryId\": 3,\r\n    \"coverImage\": \"https://example.com/images/vegan-delights.jpg\",\r\n    \"fileUrl\": \"https://example.com/files/vegan-delights.pdf\",\r\n    \"publishedDate\": \"2023-11-20\"\r\n  }\r\n",
+									"raw": "{\r\n    \"title\": \"kiki: Fresh & Flavorful\",\r\n    \"author\": \"youssef moinou\",\r\n    \"isbn\": \"978-0-98765-432-2\",\r\n    \"price\": 40.50,\r\n    \"stock\": 30,\r\n    \"description\": \"A modern vegan cookbook packed with vibrant plant-based recipes that are easy, healthy, and full of flavor.\",\r\n    \"categoryId\": 2,\r\n    \"coverImage\": \"https://example.com/images/vegan-delights.jpg\",\r\n    \"fileUrl\": \"https://example.com/files/vegan-delights.pdf\",\r\n    \"publishedDate\": \"2023-11-20\"\r\n  }\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -264,13 +265,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEzNDQ3MzksImV4cCI6MTc2MTk0OTUzOX0.zfEbv8mWxdlb-VnQXjzAHqeeUZo-j6Rza4egl1W9Gy0",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"International Cuisine\",\r\n    \"description\": \"Explore global flavors from Italian to Japanese and everything in between.\"\r\n}",
+									"raw": "{\r\n    \"name\": \"local Cuisine\",\r\n    \"description\": \"Explore global flavors from Italian to Japanese and everything in between.\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -581,7 +582,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkNMSUVOVCIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwiaWF0IjoxNzYxMzQ0NDYyLCJleHAiOjE3NjE5NDkyNjJ9.vImuOmhSscoe9oURIMh9At_-bOo8Px4fIl4ZjM-xvIQ",
 										"type": "text"
 									}
 								],
@@ -605,13 +606,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IkFETUlOIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NjEwNTEyODEsImV4cCI6MTc2MTY1NjA4MX0.Kr0Kk-tRaIE93Q3q6_PUKPAEHrhvHYpCr2k7c5V5xas",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkNMSUVOVCIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwiaWF0IjoxNzYxMzQ0NDYyLCJleHAiOjE3NjE5NDkyNjJ9.vImuOmhSscoe9oURIMh9At_-bOo8Px4fIl4ZjM-xvIQ",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"total\": 79.90,\r\n  \"paymentMode\": \"Credit Card\",\r\n  \"isGift\": true,\r\n  \"giftRecipientName\": \"Laura Bennett\",\r\n  \"giftRecipientEmail\": \"laura.bennett@example.com\",\r\n  \"giftMessage\": \"Happy Birthday! Enjoy these delicious recipes.\",\r\n  \"items\": [\r\n    {\r\n      \"bookId\": 2,\r\n      \"quantity\": 2,\r\n      \"priceEach\": 29.95\r\n    },\r\n    {\r\n      \"bookId\": 4,\r\n      \"quantity\": 1,\r\n      \"priceEach\": 29.95\r\n    }\r\n  ]\r\n}\r\n\r\n",
+									"raw": "{\r\n  \"total\": 79.90,\r\n  \"paymentMode\": \"Credit Card\",\r\n  \"isGift\": true,\r\n  \"giftRecipientName\": \"Laura Bennett\",\r\n  \"giftRecipientEmail\": \"laura.bennett@example.com\",\r\n  \"giftMessage\": \"Happy Birthday! Enjoy these delicious recipes.\"\r\n}\r\n\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -626,6 +627,40 @@
 									"path": [
 										"orders",
 										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add item to order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkNMSUVOVCIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwiaWF0IjoxNzYxMzQ0NDYyLCJleHAiOjE3NjE5NDkyNjJ9.vImuOmhSscoe9oURIMh9At_-bOo8Px4fIl4ZjM-xvIQ",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bookId\": 2,\r\n    \"quantity\": 2,\r\n    \"priceEach\": 34.50\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiBaseUrl}}/orders/1/items",
+									"host": [
+										"{{apiBaseUrl}}"
+									],
+									"path": [
+										"orders",
+										"1",
+										"items"
 									]
 								}
 							},
